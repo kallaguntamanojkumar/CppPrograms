@@ -36,12 +36,12 @@ jobs:
           curl -sSLo $HOME\.sonar\build-wrapper.zip ${{ env.BUILD_WRAPPER_DOWNLOAD_URL }}
           unzip -o $HOME\.sonar\build-wrapper.zip -d $HOME\.sonar\
           echo "$HOME\.sonar\build-wrapper-win-x86" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
-      - name: Run build-wrapper
-        run: |
-          build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} MSBuild.exe 
+      #- name: Run build-wrapper
+       # run: |
+        #  build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} MSBuild.exe 
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: 808491229daf2ee2eb90b4f7991cff8cfded692a
         run: |
-          sonar-scanner --define sonar.host.url="${{ env.SONAR_SERVER_URL }}" --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
+          sonar-scanner --define sonar.host.url="${{ env.SONAR_SERVER_URL }}" #--define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
